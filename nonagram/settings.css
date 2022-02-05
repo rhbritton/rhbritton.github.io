@@ -1,8 +1,25 @@
+[data-view="settings"] {
+    text-align: center;
+}
+
 [data-option] {
     display: inline-block;
     padding: 1em;
     border: 1px solid black;
     text-align: center;
+    width: 5em;
+    margin-top: 1em;
+}
+
+#startGame {
+    font-size: 2em;
+    margin-top: 1em;
+}
+
+label {
+    display: block;
+    font-size: 1.5em;
+    margin-top: 1em;
 }
 
 [data-option][data-selected="true"] {

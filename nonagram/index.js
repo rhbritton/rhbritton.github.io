@@ -260,6 +260,7 @@ $('#startGame').click(function() {
     let size = Select.getSelectValue('size');
 
     Game.start(size, difficulty);
+    $('[data-view="game"]').attr('data-gamesize', size);
     View.change('game');
 });
 
