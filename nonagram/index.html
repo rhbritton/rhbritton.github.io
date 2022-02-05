@@ -4,23 +4,31 @@
     <meta charset="UTF-8">
     <title>Nonagram</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./index.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="./index.css" />
+    <link rel="stylesheet" type="text/css" href="./settings.css" />
 </head>
 
-<style>
+<body>
 
-    .timer .text {
-        font-weight: bold;
-        transition-property: font-size;
-        transition-duration: 0.75s;
-        transition-delay: 0s;
-    }
+    <div data-selected="true" data-view="settings">
 
-</style>
+        <div data-select="difficulty">
+            <div data-option="difficulty" data-value="easy">Easy</div>
+            <div data-selected="true" data-option="difficulty" data-value="medium">Medium</div>
+            <div data-option="difficulty" data-value="hard">Hard</div>
+        </div>
 
-<body style="font-size: 0.8em;">
+        <div data-select="size">
+            <div data-option="size" data-value="5">5 x 5</div>
+            <div data-selected="true" data-option="size" data-value="10">10 x 10</div>
+            <div data-option="size" data-value="15">15 x 15</div>
+        </div>
 
-    <div id="content">
+        <button id="startGame">Start Game</button>
+
+    </div>
+
+    <div data-view="game">
 
         <div class="hints_x"></div>
         <div class="hints_y"></div>

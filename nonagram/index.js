@@ -1,14 +1,32 @@
 $(function() {
 
+let isMouseDown = false;
+$('body').mouseup(function() {
+    isMouseDown = false;
+})
+
+let selectType = $('[data-type][data-selected="true"]').attr('data-type');
+
+let $board = $('#board');
+
+// timer.js
+let Timer = {};
 let d = new Date();
 let timerSelect = document.querySelector('.timer .text');
-setInterval(function() {
-    timerSelect.innerHTML = Math.floor((new Date()-d)/1000);
-}, 50)
-
 let timerDiv = document.querySelector('.timer');
 let oscillate = 1;
-setInterval(function() {
+
+Timer.start = function() {
+    d = new Date();
+    setInterval(Timer.update, 50);
+    setInterval(Timer.oscillate, 1000);
+}
+
+Timer.update = function() {
+    timerSelect.innerHTML = Math.floor((new Date()-d)/1000);
+}
+
+Timer.oscillate = function() {
     if (!oscillate) {
         oscillate = 1;
         timerDiv.setAttribute('style', 'font-size: 6em;');
@@ -16,18 +34,9 @@ setInterval(function() {
         oscillate = 0;
         timerDiv.setAttribute('style', 'font-size: 10em;');
     }
-    
-}, 1000)
+}
 
-let isMouseDown = false;
 
-let selectType = $('[data-type][data-selected="true"]').attr('data-type');
-let boardSize = { x: 10, y: 10 };
-let messUps = 0;
-
-let $board = $('#board');
-
-let percentChanceBlue = 0.4;
 
 // tile.js
 let Tile = {};
@@ -59,8 +68,6 @@ Tile.create = function(x, y) {
 }
 
 Tile.checkAnswer = function($tile, answerToCheck) {
-    console.log($tile.attr('data-answer'))
-    console.log(answerToCheck)
     return answerToCheck == $tile.attr('data-answer');
 }
 
@@ -175,10 +182,30 @@ Board.generate = function() {
 
 
 
-// index.js
-Board.generate();
-
+// game.js
+let Game = {};
 let $messUpText = $('.messUpText');
+
+let boardSize = { x: 15, y: 15 };
+let percentChanceBlue = 0.5;
+let messUps = 0;
+
+Game.start = function(size, difficulty) {
+    messUps = 0;
+    boardSize = { x: size, y: size };
+
+    if (difficulty == 'easy') {
+        percentChanceBlue = 0.6;
+    } else if (difficulty == 'medium') {
+        percentChanceBlue = 0.5;
+    } else if (difficulty == 'hard') {
+        percentChanceBlue = 0.4;
+    }
+
+    Board.generate();
+    Timer.start();
+}
+
 function clickTile($tile) {
     if (selectType == 'select' && Tile.checkAnswer($tile, '1')) {
         $tile.attr('data-answered', 'true');
@@ -191,46 +218,85 @@ function clickTile($tile) {
     }
 }
 
-$('body').mouseup(function() {
-    isMouseDown = false;
-})
-
-$('#board').on('mousedown touchstart', '.tile', function() {
-    isMouseDown = true;
-
-    let $tile = $(this);
-    if ($tile.attr('data-answered') != 'true') {
-        clickTile($tile);
-    }
-})
-
-$('#board').on('mousemove touchmove', '.tile', function(e) {
-    if (isMouseDown) {
-        console.log(e)
-        console.log(e.currentTarget)
-        console.log(e.target)
-
+Game.addEventListeners = function() {
+    $('#board').on('mousedown', '.tile', function() {
+        isMouseDown = true;
+    
         let $tile = $(this);
-
         if ($tile.attr('data-answered') != 'true') {
             clickTile($tile);
         }
-    }
+    })
+    
+    // $('#board').on('mousemove touchmove', '.tile', function(e) {
+    //     if (isMouseDown) {
+    //         let $tile = $(this);
+    
+    //         if ($tile.attr('data-answered') != 'true') {
+    //             clickTile($tile);
+    //         }
+    //     }
+    // })
+    
+    $('[data-type="select"]').click(function() {
+        $('[data-type="prevent"]').removeAttr('data-selected');
+        $(this).attr('data-selected', true);
+        
+        selectType = 'select';
+    });
+    
+    $('[data-type="prevent"]').click(function() {
+        $('[data-type="select"]').removeAttr('data-selected');
+        $(this).attr('data-selected', true);
+        
+        selectType = 'prevent';
+    });
+}
+
+
+// settings.js
+$('#startGame').click(function() {
+    let difficulty = Select.getSelectValue('difficulty');
+    let size = Select.getSelectValue('size');
+
+    Game.start(size, difficulty);
+    View.change('game');
+});
+
+
+// views.js
+let View = {};
+View.change = function(id) {
+    $('[data-view]').hide();
+    $('[data-view="'+id+'"]').show();
+}
+
+
+// select.js
+let Select = {};
+
+$('[data-option]').click(function() {
+    let select_id = $(this).attr('data-option');
+    $('[data-option="'+select_id+'"]').removeAttr('data-selected');
+    $(this).attr('data-selected', 'true');
 })
 
-$('[data-type="select"]').click(function() {
-    $('[data-type="prevent"]').removeAttr('data-selected');
-    $(this).attr('data-selected', true);
+Select.getSelectValue = function(id) {
+    let $selectedOption = $('[data-option="'+id+'"][data-selected="true"]');
     
-    selectType = 'select';
-});
+    let value = "";
+    if ($selectedOption.length)
+        value = $selectedOption.attr('data-value');
 
-$('[data-type="prevent"]').click(function() {
-    $('[data-type="select"]').removeAttr('data-selected');
-    $(this).attr('data-selected', true);
-    
-    selectType = 'prevent';
-});
+    return value;
+}
+
+
+
+// index.js
+Game.addEventListeners();
+
+
 
 
 

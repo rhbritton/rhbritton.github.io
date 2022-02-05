@@ -1,0 +1,10 @@
+[data-option] {
+    display: inline-block;
+    padding: 1em;
+    border: 1px solid black;
+    text-align: center;
+}
+
+[data-option][data-selected="true"] {
+    background-color: gray;
+}

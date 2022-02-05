@@ -1,16 +1,17 @@
 body {
     margin: 0;
     padding: 0;
-    font-size: 1.25em;
+    font-size: 0.8em;
 }
 
-@media (max-width: 140em) {
-    body {
-        font-size: 0.7em;
-    }
+[data-view] {
+    display: none;
+}
+[data-view][data-selected="true"] {
+    display: block;
 }
 
-#content {
+[data-view="game"] {
     text-align: center;
 }
 
@@ -101,4 +102,11 @@ body {
 
 [data-type][data-selected="true"] {
     border: 5px solid gold;
+}
+
+.timer .text {
+    font-weight: bold;
+    transition-property: font-size;
+    transition-duration: 0.75s;
+    transition-delay: 0s;
 }
