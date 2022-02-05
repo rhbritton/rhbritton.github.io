@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nonagram</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./index.css" media="screen"/>
+</head>
+
+<style>
+
+    .timer .text {
+        font-weight: bold;
+        transition-property: font-size;
+        transition-duration: 0.75s;
+        transition-delay: 0s;
+    }
+
+</style>
+
+<body style="font-size: 0.8em;">
+
+    <div id="content">
+
+        <div class="hints_x"></div>
+        <div class="hints_y"></div>
+
+        <div id="board">a</div>
+
+        <div class="select_action">
+            <div data-selected="true" data-type="select"></div>
+            <div data-type="prevent"></div>
+        </div>
+
+        <div class="messUps">
+            Incorrect selections: <span class="messUpText">0</span>
+        </div>
+
+        <div style="font-size: 6em;" class="timer">
+            <span class="text">0</span>s
+        </div>
+
+    </div>
+
+    <script src="./jquery.min.js"></script>
+    <script src="./index.js"></script>
+</body>
+
+</html>

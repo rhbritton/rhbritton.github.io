@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 1.25em;
+}
+
+@media (max-width: 140em) {
+    body {
+        font-size: 0.7em;
+    }
+}
+
+#content {
+    text-align: center;
+}
+
+.select_action, .messUps {
+    padding-left: 2em;
+}
+
+#board {
+    display: inline-block;
+}
+
+.tile {
+    float: left;
+    border: 1px solid black;
+    width: 2em;
+    height: 2em;
+}
+
+.tile[data-x="0"] {
+    clear: left;
+}
+
+.tile[data-x="5"] {
+    border-left: 2px solid black;
+}
+
+.tile[data-y="5"] {
+    border-top: 2px solid black;
+}
+
+.tile[data-x="10"] {
+    border-left: 2px solid black;
+}
+
+.tile[data-y="10"] {
+    border-top: 2px solid black;
+}
+
+.tile[data-answered][data-answer="1"] {
+    background-color: #5c99dc;
+}
+
+.tile[data-answered][data-answer="0"] {
+    background-color: #ffc28b;
+}
+
+.hints {
+    border: 1px solid white;
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+}
+
+.hints_x {
+    border: 4px solid white;
+    margin-left: 2em;
+}
+
+.hints_y {
+    width: 2em;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.hint {
+    font-size: 0.8em;
+}
+
+[data-type] {
+    display: inline-block;
+    width: 4em;
+    height: 4em;
+}
+
+[data-type][data-selected="true"] {
+    border: 5px solid gold;
+}
+
+[data-type="select"] {
+    border: 5px solid white;
+    background-color: #5c99dc;
+}
+
+[data-type="prevent"] {
+    border: 5px solid white;
+    background-color: #ffc28b;
+}
+
+[data-type][data-selected="true"] {
+    border: 5px solid gold;
+}
