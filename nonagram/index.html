@@ -10,7 +10,41 @@
 
 <body>
 
+    <div data-view="hiscores">
+        <button id="settings">Settings</button>
+
+        <h1>Hiscores</h1>
+
+        <label>Type</label>
+        <div data-select="hiscoreType">
+            <div data-selected="true" data-option="hiscoreType" data-value="perfect">No Mistakes</div>
+            <div data-option="hiscoreType" data-value="three">Up To 3 Mistakes</div>
+            <div data-option="hiscoreType" data-value="any">Any # of Mistakes</div>
+        </div>
+
+        <div data-select-view="hiscoreType" data-select-view-value="perfect" id="hiscoresListPerfect">
+
+        </div>
+        <div data-select-view="hiscoreType" data-select-view-value="three" id="hiscoresListThree">
+
+        </div>
+        <div data-select-view="hiscoreType" data-select-view-value="any" id="hiscoresList">
+
+        </div>
+
+    </div>
+
     <div data-selected="true" data-view="settings">
+        <button id="hiscores">Hiscores</button>
+
+        <h1>Settings</h1>
+
+        <label>Ruleset</label>
+        <div data-select="ruleset">
+            <div data-option="ruleset" data-value="perfect">No Mistakes</div>
+            <div data-selected="true" data-option="ruleset" data-value="three">Up To 3 Mistakes</div>
+            <div data-option="ruleset" data-value="any">Any # of Mistakes</div>
+        </div>
 
         <label>Difficulty</label>
         <div data-select="difficulty">
@@ -50,6 +84,14 @@
         <div style="font-size: 6em;" class="timer">
             <span class="text">0</span>s
         </div>
+
+        <h2 id="isWin">
+            You have won!
+        </h2>
+
+        <h2 id="isHiscore">
+            You got a new hiscore!
+        </h2>
 
     </div>
 

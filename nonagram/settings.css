@@ -1,5 +1,9 @@
-[data-view="settings"] {
+[data-view="settings"], [data-view="hiscores"] {
     text-align: center;
+}
+
+[data-select-view] {
+    display: none;
 }
 
 [data-option] {

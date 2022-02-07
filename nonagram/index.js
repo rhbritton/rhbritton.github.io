@@ -11,7 +11,8 @@ let $board = $('#board');
 
 // timer.js
 let Timer = {};
-let d = new Date();
+let startTime = new Date();
+let timeStopped;
 let timerSelect = document.querySelector('.timer .text');
 let timerDiv = document.querySelector('.timer');
 let oscillate = 1;
@@ -20,18 +21,23 @@ let updateInterval;
 let oscInterval;
 
 Timer.start = function() {
-    d = new Date();
+    startTime = new Date();
     updateInterval = setInterval(Timer.update, 50);
     oscInterval = setInterval(Timer.oscillate, 1000);
 }
 
 Timer.stop = function() {
+    timeStopped = new Date();
     clearInterval(updateInterval);
     clearInterval(oscInterval);
 }
 
+Timer.getSeconds = function(d) {
+    return Math.floor((d-startTime)/1000);
+}
+
 Timer.update = function() {
-    timerSelect.innerHTML = Math.floor((new Date()-d)/1000);
+    timerSelect.innerHTML = Timer.getSeconds(new Date());
 }
 
 Timer.oscillate = function() {
@@ -192,11 +198,15 @@ Board.generate = function() {
 let Game = {};
 let $messUpText = $('.messUpText');
 
+let currentDifficulty;
+let currentRuleset;
 let boardSize = { x: 15, y: 15 };
 let percentChanceBlue = 0.5;
 let messUps = 0;
 
-Game.start = function(size, difficulty) {
+Game.start = function(size, difficulty, ruleset) {
+    currentDifficulty = difficulty;
+    currentRuleset = ruleset;
     messUps = 0;
     boardSize = { x: size, y: size };
 
@@ -235,6 +245,12 @@ function clickTile($tile) {
 
     if (Game.checkWin()) {
         Timer.stop();
+
+        let isHiscore = Storage.saveHiscore(Timer.getSeconds(timeStopped), currentDifficulty, boardSize.x, boardSize.y, currentRuleset);
+        if (isHiscore)
+            $('#isHiscore').show();
+        else
+            $('#isWin').show();
     }
 }
 
@@ -275,23 +291,128 @@ Game.addEventListeners = function() {
 
 // storage.js
 let Storage = {};
-Storage.getHiscore = function() {
+Storage.getHiscoreStorageName = function(difficulty, sizeX, sizeY, ruleset) {
+    let name = sizeX+'-'+sizeY+'-'+difficulty+'-hiscore';
+    if (ruleset)
+        name += '-'+ruleset;
 
+    return name;
 }
 
-Storage.updateHiscore = function() {
+Storage.getHiscore = function(difficulty, sizeX, sizeY, ruleset) {
+    let hiscoreStorageName = Storage.getHiscoreStorageName(difficulty, sizeX, sizeY, ruleset);
 
+    let hiscore = localStorage.getItem(hiscoreStorageName);
+    if (hiscore)
+        hiscore = parseInt(hiscore);
+
+    return hiscore;
+}
+
+Storage.saveHiscore = function(hiscoreTime, difficulty, sizeX, sizeY, ruleset) {
+    let isHiscore = false;
+    let allowHiscore = true;
+    if (ruleset == 'three') {
+        if (messUps > 3)
+            allowHiscore = false;
+    } else if (ruleset == 'perfect') {
+        if (messUps)
+            allowHiscore = false;
+    }
+
+    if (allowHiscore) {
+        let hiscoreStorageName = Storage.getHiscoreStorageName(difficulty, sizeX, sizeY, ruleset);
+
+        let currentHiscore = Storage.getHiscore(difficulty, sizeX, sizeY, ruleset);
+        if (!currentHiscore || hiscoreTime < currentHiscore) {
+            localStorage.setItem(hiscoreStorageName, hiscoreTime);
+            isHiscore = true;
+        }
+    }
+
+    return isHiscore;
 }
 
 
 // settings.js
 $('#startGame').click(function() {
+    let ruleset = Select.getSelectValue('ruleset');
     let difficulty = Select.getSelectValue('difficulty');
     let size = Select.getSelectValue('size');
 
-    Game.start(size, difficulty);
+    Game.start(size, difficulty, ruleset);
     $('[data-view="game"]').attr('data-gamesize', size);
     View.change('game');
+});
+
+$('#hiscores').click(function() {
+    View.change('hiscores');
+})
+
+
+// hiscores.js
+$('#settings').click(function() {
+    View.change('settings');
+})
+
+$('[data-select="difficulty"] [data-option]').each(function() {
+    let difficulty = $(this).attr('data-value');
+
+    $('#hiscoresList').append(`
+        <h3>`+difficulty+`</h3>
+    `);
+
+    $('#hiscoresListThree').append(`
+        <h3>`+difficulty+`</h3>
+    `);
+
+    $('#hiscoresListPerfect').append(`
+        <h3>`+difficulty+`</h3>
+    `);
+
+    $('[data-select="size"] [data-option]').each(function() {
+        let label = $(this).text();
+        let value = Storage.getHiscore(difficulty, $(this).attr('data-value'), $(this).attr('data-value'));
+        if (value) {
+            value += 's';
+        } else {
+            value = 'None';
+        }
+        
+        $('#hiscoresList').append(`
+            <div class="hiscore">
+                <span class="label">`+label+`: </span>
+                <span class="value">`+value+`</span>
+            </div>
+        `);
+        
+        let value2 = Storage.getHiscore(difficulty, $(this).attr('data-value'), $(this).attr('data-value'), 'three');
+        if (value2) {
+            value2 += 's';
+        } else {
+            value2 = 'None';
+        }
+        $('#hiscoresListThree').append(`
+            <div class="hiscore">
+                <span class="label">`+label+`: </span>
+                <span class="value">`+value2+`</span>
+            </div>
+        `);
+        
+        let value3 = Storage.getHiscore(difficulty, $(this).attr('data-value'), $(this).attr('data-value'), 'perfect');
+        if (value3) {
+            value3 += 's';
+        } else {
+            value3 = 'None';
+        }
+        $('#hiscoresListPerfect').append(`
+            <div class="hiscore">
+                <span class="label">`+label+`: </span>
+                <span class="value">`+value3+`</span>
+            </div>
+        `);
+    });
+
 });
 
 
@@ -310,7 +431,12 @@ $('[data-option]').click(function() {
     let select_id = $(this).attr('data-option');
     $('[data-option="'+select_id+'"]').removeAttr('data-selected');
     $(this).attr('data-selected', 'true');
+
+    $('[data-select-view="'+select_id+'"]').hide();
+    $('[data-select-view="'+select_id+'"][data-select-view-value="'+$(this).attr('data-value')+'"]').show();
 })
+
+$('[data-option][data-selected="true"]').trigger('click');
 
 Select.getSelectValue = function(id) {
     let $selectedOption = $('[data-option="'+id+'"][data-selected="true"]');
@@ -321,6 +447,8 @@ Select.getSelectValue = function(id) {
 
     return value;
 }
+
+
 
 
 
