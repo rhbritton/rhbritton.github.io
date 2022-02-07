@@ -16,10 +16,18 @@ let timerSelect = document.querySelector('.timer .text');
 let timerDiv = document.querySelector('.timer');
 let oscillate = 1;
 
+let updateInterval;
+let oscInterval;
+
 Timer.start = function() {
     d = new Date();
-    setInterval(Timer.update, 50);
-    setInterval(Timer.oscillate, 1000);
+    updateInterval = setInterval(Timer.update, 50);
+    oscInterval = setInterval(Timer.oscillate, 1000);
+}
+
+Timer.stop = function() {
+    clearInterval(updateInterval);
+    clearInterval(oscInterval);
 }
 
 Timer.update = function() {
@@ -84,7 +92,6 @@ Board.clear = function() {
 
 Board.getHintNums = function(axis, i) {
     let nums = [];
-    console.log(boardSolution)
     if (axis == 'y') {
         let count = 0;
         for (var j=0; j<boardSize.y; j++) {
@@ -142,7 +149,6 @@ Board.getHintsHTML = function(hintsArr) {
 
 Board.addNumberHints = function(axis, i) {
     let hintNums = Board.getHintNums(axis, i);
-    console.log(hintNums)
     let hintHTML = Board.getHintsHTML(hintNums);
     
     let $hints = $('.hints_'+axis);
@@ -206,6 +212,16 @@ Game.start = function(size, difficulty) {
     Timer.start();
 }
 
+Game.checkWin = function() {
+    let hasNotWon = $('[data-answer="1"]').length ? false : true;
+    $('[data-answer="1"]').each(function() {
+        if ($(this).attr('data-answered') != 'true')
+            hasNotWon = true;
+    });
+
+    return !hasNotWon;
+}
+
 function clickTile($tile) {
     if (selectType == 'select' && Tile.checkAnswer($tile, '1')) {
         $tile.attr('data-answered', 'true');
@@ -215,6 +231,10 @@ function clickTile($tile) {
         isMouseDown = false;
         messUps++;
         $messUpText.html(messUps);
+    }
+
+    if (Game.checkWin()) {
+        Timer.stop();
     }
 }
 
@@ -251,6 +271,16 @@ Game.addEventListeners = function() {
         
         selectType = 'prevent';
     });
+}
+
+// storage.js
+let Storage = {};
+Storage.getHiscore = function() {
+
+}
+
+Storage.updateHiscore = function() {
+
 }
 
 
