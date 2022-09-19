@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <title>00:00</title>
+    </head>
+
+    <style>
+        body {
+            text-align: center;
+            font-size: 5em;
+        }
+
+        button {
+            font-size: 0.5em;
+        }
+
+    </style>
+
+    <body>
+
+        <div class="timer"><span class="minutes">00</span>:<span class="seconds">00</span></div>
+        <div class="count">0</div>
+        <button>Completed Set</button>
+
+    </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <script>
+
+        let minutes = 0;
+        let seconds = 0;
+        let count = 0;
+
+        let $minutes = $('.minutes');
+        let $seconds = $('.seconds');
+        let $count = $('.count');
+
+        let interval;
+
+        $('button').click(function() {
+            count++;
+            $count.text(count);
+            let timePassed = 0;
+            let lastTime = new Date();
+
+            if (interval) {
+                clearInterval(interval);
+            }
+
+            interval = setInterval(function() {
+                let now = new Date();
+                timePassed += now - lastTime;
+
+                let secondsPassed = timePassed / 1000;
+                minutes = Math.floor(secondsPassed/60);
+                seconds = Math.floor(secondsPassed - (minutes*60));
+
+                $minutes.text(pad(minutes));
+                $seconds.text(pad(seconds));
+
+                $('title').text(pad(minutes)+':'+pad(seconds))
+
+                lastTime = new Date();
+            }, 100)
+        })
+
+        function pad(num) {
+            let paddedText = '';
+            if (num < 10) {
+                paddedText = '0';
+            }
+
+            return paddedText + num;
+        }
+    </script>
+</html>
