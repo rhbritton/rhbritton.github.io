@@ -34,25 +34,13 @@ html {
 
 @media (max-width: 770px) {
     html {
-        font-size: 43.75%
-    }
-}
-
-@media (max-width: 615px) {
-    html {
-        font-size: 40%
-    }
-}
-
-@media (max-width: 350px) {
-    html {
-        font-size: 35%
+        font-size: 50%
     }
 }
 
 body {
     min-height: 100vh;
-    color: #222222;
+    color: #282828;
     font-family: montserrat, sans-serif;
     background-color: #fbfbfb;
     overflow-x: hidden
@@ -396,6 +384,12 @@ button {
     }
 }
 
+@media (max-width: 600px) {
+    .skills__item-name {
+        font-size: 1.2rem
+    }
+}
+
 .skills__item-fade-in {
     opacity: 1
 }
@@ -474,32 +468,14 @@ button {
     margin-right: auto;
     margin-top: 7em;
     display: flex;
-    width: 500px;
+    
     flex-direction: column;
     align-items: center;
     justify-content: center;
     z-index: 10;
     margin-bottom: 3rem;
 
-    width: 400px;
-}
-
-@media (max-width: 700px) {
-    .contact {
-        width: 400px
-    }
-}
-
-@media (max-width: 470px) {
-    .contact {
-        width: 330px
-    }
-}
-
-@media (max-width: 400px) {
-    .contact {
-        width: 260px
-    }
+    max-width: 500px;
 }
 
 .contact__heading {
@@ -530,7 +506,8 @@ button {
 
 .contact__text {
     font-size: 1.8rem;
-    margin-bottom: 3rem
+    margin-bottom: 3rem;
+    padding: 0 1em;
 }
 
 .footer {
@@ -646,7 +623,7 @@ button {
     height: auto;
     margin-left: auto;
     margin-right: auto;
-    color: #222222;
+    color: #282828;
     font-weight: 400;
     z-index: 999
 }
@@ -691,7 +668,7 @@ button {
 
     .heading__line-1,
     .heading__line-2 {
-        font-size: 5rem
+        font-size: 3rem
     }
 }
 
@@ -893,7 +870,7 @@ button {
     position: relative;
     left: -2.5rem;
     top: 6.3rem;
-    z-index: -1
+    z-index: -1;
 }
 
 @media (max-width: 770px) {
@@ -1306,7 +1283,12 @@ button {
     font-weight: 700;
     margin-top: 9rem;
     margin-bottom: 3rem;
-    z-index: 9999
+    z-index: 9999;
+    max-width: 100%;
+}
+
+.section-heading:before {
+    max-width: 100%;
 }
 
 @media (max-width: 1000px) {
@@ -1330,8 +1312,8 @@ button {
 .clouds {
     position: absolute; 
     top: -25%; 
-    left: -50%;
-    width: 200%;
+    /* left: -50%;
+    width: 200%; */
     height: 200%;
     z-index: -1;
     
@@ -1374,12 +1356,12 @@ button {
 
 .container {
     margin-top: 0;
-    background-color: #eee;
+    background-color: #282828;
     margin: 2em 0;
     width: 95%;
     max-width: 80em;
 
-    border: 3px solid #333;
+    box-shadow: 8px 16px 24px rgba(0, 0, 0, 0.5);
 }
 
 .image-left {
@@ -1420,6 +1402,7 @@ button {
     position: relative;
     width: 100%;
     padding: 2em;
+    padding-bottom: 1em;
     padding-right: 12em;
     background-color: #333;
     color: #eee;
@@ -1427,6 +1410,16 @@ button {
 }
 [data-modal-content] {
     display: none;
+}
+
+.more_description {
+    position: relative;
+    width: 100%;
+    padding: 2em;
+    padding-top: 0;
+    background-color: #333;
+    color: #eee;
+    font-size: 1.5em;
 }
 
 .description .buttons {
@@ -1589,5 +1582,11 @@ button {
     }
     #modal_container.active #modal {
         margin-top: 0;
+    }
+}
+
+@media (max-width: 400px) {
+    .contact .contact__text .email {
+        font-size: 2em;
     }
 }

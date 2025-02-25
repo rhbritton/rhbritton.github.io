@@ -7,10 +7,17 @@ modal.addEventListener('mouseover', () => {
 modal.addEventListener('mouseout', () => {
     isMouseOverModal = false;
 });
+modal.addEventListener('touchstart', () => {
+    isMouseOverModal = true;
+});
+modal.addEventListener('touchend', () => {
+    isMouseOverModal = false;
+});
 
 
-let scrollFn = function(e) {};
-let inActiveScrollFn = function(e) {};
+
+let scrollFn = function(e) { console.log('scrollFn'); };
+let inActiveScrollFn = function(e) { console.log('scrollFn'); };
 let activeScrollFn = function(e) {
     if (!isMouseOverModal) {
         e.preventDefault();
@@ -162,7 +169,8 @@ copy.addEventListener('click', function(event) {
 const canvas = document.querySelector('.clouds');
 const ctx = canvas.getContext('2d');
 
-canvas.width  = window.innerWidth;
+canvas.width  = window.innerWidth + 500;
+canvas.style.left = -500;
 canvas.height = window.innerHeight;
 
 let clouds = [];
@@ -250,7 +258,7 @@ function initializeCloud(overrideX, overrideY, overrideSize, timestamp) {
 function initializeClouds() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    for (let i = 0; i < 15; i++) { 
+    for (let i = 0; i < 35; i++) { 
         initializeCloud();
     }
 }
@@ -269,7 +277,7 @@ function generateClouds() {
         // let moveBy = ((timeDiff)/10) * cloud.speed;
 
         // clouds[i].x += moveBy;
-        if (clouds[i].x > canvas.width + 2000)
+        if (clouds[i].x > canvas.width + 500)
             return removeIndices.push(i);
 
         // clouds[i].lastTimestamp = timestamp;
