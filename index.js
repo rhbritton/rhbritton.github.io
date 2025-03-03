@@ -7,22 +7,48 @@ modal.addEventListener('mouseover', () => {
 modal.addEventListener('mouseout', () => {
     isMouseOverModal = false;
 });
-modal.addEventListener('touchstart', () => {
+
+let startY = null; 
+modal.addEventListener('touchstart', (e) => {
+    startY = e.touches[0].clientY;
     isMouseOverModal = true;
-});
+}, { passive: false });
 modal.addEventListener('touchend', () => {
+    startY = null;
     isMouseOverModal = false;
 });
 
 
+function checkSign(num) {
+    if (Object.is(num, -0)) {
+      return -1;
+    } else if (Math.sign(num) === 1) {
+      return +1;
+    } else if (Math.sign(num) === -1) {
+      return -1;
+    } else {
+      return +1;
+    }
+  }
 
-let scrollFn = function(e) { console.log('scrollFn'); };
-let inActiveScrollFn = function(e) { console.log('scrollFn'); };
+
+let scrollFn = function(e) { /*console.log('scrollFn');*/ };
+let inActiveScrollFn = function(e) { /*console.log('inActiveScrollFn');*/ };
 let activeScrollFn = function(e) {
     if (!isMouseOverModal) {
         e.preventDefault();
         e.stopPropagation();
     } else {
+        let touchEvent = false;
+        let deltaY = e.deltaY;
+        if (deltaY === undefined) {
+            touchEvent = true;
+            const currentY = e.touches[0].clientY;
+            deltaY = -1 * checkSign(currentY - startY);
+
+            startY = currentY;
+        }
+
         const scrollTop = modalContentContainer.scrollTop;
         const scrollHeight = modalContentContainer.scrollHeight;
         const clientHeight = modalContentContainer.clientHeight;
@@ -30,16 +56,17 @@ let activeScrollFn = function(e) {
         const isAtTop = scrollTop === 0;
         const isAtBottom = Math.ceil(scrollTop) + clientHeight + 1 >= scrollHeight;
 
-        if (e.deltaY < 0 && isAtTop) { // Scrolling up and at top
+        if (deltaY < 0 && isAtTop && e.cancelable) {
             e.preventDefault();
             e.stopPropagation();
-        } else if (e.deltaY > 0 && isAtBottom) { // Scrolling down and at bottom
+        } else if (deltaY > 0 && isAtBottom && e.cancelable) {
             e.preventDefault();
             e.stopPropagation();
         }
     }
 }
 
+// TODO: on mobile and modal, dragging up at top then down will scroll background, same with opposite for bottom
 document.body.addEventListener('scroll', function(e) { scrollFn(e) }, { passive: false }); // Important for touchmove
 document.body.addEventListener('mousewheel', function(e) { scrollFn(e) }, { passive: false });
 document.body.addEventListener('touchmove', function(e) { scrollFn(e) }, { passive: false });
@@ -160,7 +187,6 @@ let copy = document.querySelector('.contact__text.email');
 let emailText = document.querySelector('.contact__text.email .text').textContent;
 
 copy.addEventListener('click', function(event) {
-    console.log(emailText)
     copyTextToClipboard(emailText);
 });
 

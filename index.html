@@ -53,14 +53,6 @@
 
                     When I'm not working on a project, I love spending time with my family, lifting, running, 
                     and writing/playing songs on the guitar.
-
-
-
-                    <!-- Fully committed to the philosophy of life-long learning, I’m a full stack
-                    developer with a deep passion for JavaScript, React and all things web development. The unique
-                    combination of creativity, logic, technology and never running out of new things to discover, drives
-                    my excitement and passion for web development. When I’m not at my computer I like to spend my time
-                    reading, keeping fit and playing guitar. -->
                 </p>
             </div>
         </div>
@@ -145,170 +137,217 @@
     </section>
     <section class="projects" id="projects">
         <h2 class="projects__heading section-heading">Projects</h2>
-        <div class="container">
-            <div class="description">
-                <div class="content">
-                    <h2>
-                        PRICSM
-                    </h2>
-                    <p>Retirement Community Software</p>
-                    <!-- <br/>
-                    <p>Built to solve various retirement community problems based on customer feedback and needs.</p> -->
+        
+        <div class="projects_container masonry-container">
+            <div class="container masonry-item">
+                <div class="description">
+                    <div class="content">
+                        <h2>
+                            PRICSM
+                        </h2>
+                        <p>Retirement Community Software</p>
+                        <!-- <br/>
+                        <p>Built to solve various retirement community problems based on customer feedback and needs.</p> -->
+                    </div>
+                    <div class="buttons">
+                        <button class="learn_more" data-modal-click="learn_more_pricsm" data-modal-icon="images/pricsm_logo.png" data-modal-title="PRICSM">Learn More</button>
+                    </div>
+                    <div data-modal-content="learn_more_pricsm">
+                        <h2>Overview:</h2>
+                        <p><b>Built</b> with 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/node.png" />Node.js, 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/express.png" />Express, 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/mongo.png" />Mongoose, 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/linkedin.png" />Dust.js, 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/stylus.png" />Stylus, and
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/react.png" />React
+                        </p>
+                        <p><b>Unit Tested</b> with <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/mocha.png" />Mocha</p>
+                        <p><b>Hosted</b> with 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/aws.png" />AWS
+                            EC2, Elastic Beanstalk, S3, Route 53, and CodePipeline.</p>
+                        <p><b>Current Daily Users:</b> ~300</p>
+                        <br/>
+
+                        <h2>Leases:</h2>
+                        <p>Tracks leases, past and future lease changes, resident information.</p>
+                        <br/>
+
+                        <h2>Billing:</h2>
+                        <p>Keeps a ledger for each lease. You can generate bills in bulk and send out invoices for residents.</p>
+                        <br/>
+
+                        <h2>Marketing:</h2>
+                        <p>Track interactions with potential residents and referrals. Generate reports that show which referrals and marketers are most efficient.</p>
+                        <br/>
+
+                        <h2>Resident Care:</h2>
+                        <p>Create care plans for residents and assign tasks on each shift that evenly distributes the work load based on estimated time to completion.</p>
+                        <br/>
+
+                        <h2>Maintenance:</h2>
+                        <p>Track and manage one off or recurring works orders.</p>
+                    </div>
                 </div>
-                <div class="buttons">
-                    <button class="learn_more" data-modal-click="learn_more_pricsm" data-modal-icon="images/pricsm_logo.png" data-modal-title="PRICSM">Learn More</button>
+                <div class="more_description">
+                    <p>Built to solve various retirement community problems based on customer feedback and needs.</p>
                 </div>
-                <div data-modal-content="learn_more_pricsm">
-                    <h2>Overview:</h2>
-                    <p><b>Built</b> with Nodejs, Express, Mongoose, Dust.js, Stylus, and React</p>
-                    <p><b>Unit Tested</b> with Mocha</p>
-                    <p><b>Hosted</b> with AWS EC2, Elastic Beanstalk, S3, Route 53, and CodePipeline.</p>
-                    <p><b>Current Daily Users:</b> ~300</p>
-                    <br/>
-
-                    <h2>Leases:</h2>
-                    <p>Tracks leases, past and future lease changes, resident information.</p>
-                    <br/>
-
-                    <h2>Billing:</h2>
-                    <p>Keeps a ledger for each lease. You can generate bills in bulk and send out invoices for residents.</p>
-                    <br/>
-
-                    <h2>Marketing:</h2>
-                    <p>Track interactions with potential residents and referrals. Generate reports that show which referrals and marketers are most efficient.</p>
-                    <br/>
-
-                    <h2>Resident Care:</h2>
-                    <p>Create care plans for residents and assign tasks on each shift that evenly distributes the work load based on estimated time to completion.</p>
-                    <br/>
-
-                    <h2>Maintenance:</h2>
-                    <p>Track and manage one off or recurring works orders.</p>
-                </div>
-            </div>
-            <div class="more_description">
-                <p>Built to solve various retirement community problems based on customer feedback and needs.</p>
-            </div>
-            <div class="image-left">
-                <img src="images/pricsm.png" alt="Image Description"> 
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="description">
-                <h2>MonkeyChicken</h2>
-                <p>Online Card Game</p>
-                <div class="buttons">
-                    <button class="learn_more" data-modal-click="learn_more_mc" data-modal-icon="images/mc_logo.png" data-modal-title="MonkeyChicken">Learn More</button>
-                </div>
-                <div data-modal-content="learn_more_mc">
-                    <h2>Overview:</h2>
-                    <p><b>Built</b> using a custom game engine called One-On-One I helped create for online games with Nodejs, Socket.io, Mongoose, Dust.js, and Stylus</p>
-                    <p><b>Peak Total Users:</b> ~100</p>
-                    <br/>
+                <div class="image-left">
+                    <img src="images/pricsm.png" alt="Image Description"> 
                 </div>
             </div>
-            <div class="more_description">
-                <p>A fun online card game. Make your opponent's health go to 0 and win.</p>
-            </div>
-            <div class="image-left">
-                <img src="images/monkeychicken.jpg" alt="Image Description"> 
-            </div>
-        </div>
 
-        <div class="container">
-            <div class="description big">
-                <h2>Fetch</h2>
-                <p>Restaurant Order Delivery Software</p>
-                <div class="buttons">
-                    <button class="learn_more" data-modal-click="learn_more_fetch" data-modal-icon-styles="margin-top: 0.15em;" data-modal-icon="images/fetch_logo.png" data-modal-title="Fetch">Learn More</button>
+            <div class="container masonry-item">
+                <div class="description">
+                    <h2>MonkeyChicken</h2>
+                    <p>Online Card Game</p>
+                    <div class="buttons">
+                        <button class="learn_more" data-modal-click="learn_more_mc" data-modal-icon="images/mc_logo.png" data-modal-title="MonkeyChicken">Learn More</button>
+                    </div>
+                    <div data-modal-content="learn_more_mc">
+                        <h2>Overview:</h2>
+                        <p><b>Built</b> using a custom game engine called One-On-One I helped create for online games with 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/node.png" />Node.js, 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/socketio.png" />Socket.io, 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/mongo.png" />Mongoose, 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/linkedin.png" />Dust.js, and
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/stylus.png" />Stylus
+                        </p>
+                        <p><b>Peak Total Users:</b> ~100</p>
+                        <br/>
+                    </div>
                 </div>
-                <div data-modal-content="learn_more_fetch">
-                    <h2>Overview</h2>
+                <div class="more_description">
+                    <p>A fun online card game. Make your opponent's health go to 0 and win.</p>
+                </div>
+                <div class="image-left">
+                    <img src="images/monkeychicken.jpg" alt="Image Description"> 
+                </div>
+            </div>
+                
+            <div class="container masonry-item">
+                <div class="description big">
+                    <h2>Fetch</h2>
                     <p>Restaurant Order Delivery Software</p>
-                    <br/>
-                    <h2>Fetch Site</h2>
-                    <p>Restaurant Order Delivery Software</p>
-                    <br/>
-                    <h2>Fetch For Drivers</h2>
-                    <p>Restaurant Order Delivery Software</p>
-                    <br/>
-                    <h2>Fetch Menu Builder</h2>
-                    <p>Restaurant Order Delivery Software</p>
-                    <br/>
+                    <div class="buttons">
+                        <button class="learn_more" data-modal-click="learn_more_fetch" data-modal-icon-styles="margin-top: 0.15em;" data-modal-icon="images/fetch_logo.png" data-modal-title="Fetch">Learn More</button>
+                    </div>
+                    <div data-modal-content="learn_more_fetch">
+                        <h2>Overview</h2>
+                        <p>Restaurant Order Delivery Software Suite</p>
+
+                        <br/>
+                        <h2>Fetch Site</h2>
+                        <p>
+                            This pulled menu and pricing data that the restaurants specified in the <b>Fetch Menu Builder</b> 
+                            and displayed it to customers that were close enough to order from them.
+                            <br/>
+                            <br/> - Built with 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/express.png" />Express 
+                            and used node-rest-client in order to access the api to get menu data.
+                            <br/> - Payments were handled with 
+                            <a style="text-decoration: underline; color: blue;" href="http://npmjs.com/package/balanced-official" target="_blank">Balanced</a>
+                        </p>
+
+                        <br/>
+                        <h2>Fetch For Drivers</h2>
+                        <p>
+                            When orders were placed, this application would get a notification and the driver manager would send 
+                            a text to one of the drivers to a link that had the order, delivery address, and additional information.
+                            <br/>
+                            <br/> - Built with 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/express.png" />Express
+                            and 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/linkedin.png" />Dust.js
+                        </p>
+                        <br/>
+                        <h2>Fetch Menu Builder</h2>
+                        <p>
+                            This let restaurants input their menus with pricing and options that could be selected.
+                            <br/>
+                            <br/> - Built with 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/express.png" />Express 
+                            and 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/backbone.png" />Backbone.js
+                        </p>
+                        <br/>
+                    </div>
+                </div>
+                <div class="more_description">
+                    <p>Three applications working together. The website to order from for customers, the order receiver for the drivers, and the menu builder for the restaurants.</p>
+                </div>
+                <div class="image-left">
+                    <img src="images/fetch.png" alt="Image Description">
                 </div>
             </div>
-            <div class="more_description">
-                <p>Three applications working together. The website to order from for customers, the order receiver for the drivers, and the menu builder for the restaurants.</p>
+            <div class="container masonry-item">
+                <div class="description">
+                    <h2>Spur</h2>
+                    <p>Activity Based Social Media Platform</p>
+                    <div class="buttons">
+                        <button class="learn_more" data-modal-click="learn_more_spur" data-modal-icon-styles="margin-left: 0.25em; width: 1.15em;" data-modal-icon="images/spur_logo.png" data-modal-title="Spur">Learn More</button>
+                    </div>
+                    <div data-modal-content="learn_more_spur">
+                        <h2>Overview:</h2>
+                        <p><b>Built</b> with 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/node.png" />Node.js, 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/express.png" />Express, 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/rethink.png" />RethinkDB, 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/react.png" />React, and 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/webpack.png" />Webpack
+                            
+                        </p>
+                        <br/>
+                    </div>
+                </div>
+                <div class="more_description">
+                    <p>Originally built during a hackathon, this application was used to meet up with people based on shorter notice group activities.</p>
+                </div>
+                <div class="image-right">
+                    <img src="images/spur3.png" alt="Image Description"> 
+                </div>
             </div>
-            <div class="image-left">
-                <img src="images/fetch.png" alt="Image Description">
+
+            <div class="container masonry-item">
+                <div class="description">
+                    <h2>Decide</h2>
+                    <p>Flexible Decision Maker App</p>
+                    <div class="buttons">
+                        <button class="learn_more" data-modal-click="learn_more_decide" data-modal-icon="images/decide_logo.png" data-modal-title="Decide">Learn More</button>
+                    </div>
+                    <div data-modal-content="learn_more_decide">
+                        <h2>Overview:</h2>
+                        <p><b>Built</b> with 
+                            <img style="height: 1em; vertical-align: top; margin-top: 0.09em;" src="images/react.png" />React 
+                            and originally launched in the Android app store using Cordova and stores the data with localStorage.
+                        </p>
+                    </div>
+                </div>
+                <div class="more_description">
+                    <p>When you are having trouble making a decision, save a list of options and have it select one for you. If you don't like it, run it back.</p>
+                </div>
+                <div class="image-left">
+                    <img src="images/decide.jpg" alt="Image Description"> 
+                </div>
             </div>
+            <!-- <div class="container masonry-item">
+                <div class="description">
+                    <h2>GroceryListr</h2>
+                    <p>This is a brief description of the product.</p>
+                    <p>More detailed information about the product can be added here.</p>
+                    <div class="buttons">
+                        <button class="learn_more" data-modal-click="learn_more_gl" data-modal-title="GroceryListr">Learn More</button>
+                    </div>
+                    <div data-modal-content="learn_more_gl">
+                        <p>e</p>
+                    </div>
+                </div>
+                <div class="image-left">
+                    <img src="images/monkeychicken.jpg" alt="Image Description">
+                </div>
+            </div> -->
+
         </div>
-        <div class="container">
-            <div class="description">
-                <h2>Spur</h2>
-                <p>Activity Based Social Media Platform</p>
-                <div class="buttons">
-                    <button class="learn_more" data-modal-click="learn_more_spur" data-modal-icon-styles="margin-left: 0.25em; width: 1.15em;" data-modal-icon="images/spur_logo.png" data-modal-title="Spur">Learn More</button>
-                </div>
-                <div data-modal-content="learn_more_spur">
-                    <h2>Overview:</h2>
-                    <p><b>Built</b> with Node.js, Express, RethinkDB, React, and Webpack</p>
-                    <br/>
-                </div>
-            </div>
-            <div class="more_description">
-                <p>Originally built during a hackathon, this application was used to meet up with people based on shorter notice group activities.</p>
-            </div>
-            <div class="image-right">
-                <img src="images/spur3.png" alt="Image Description"> 
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="description">
-                <h2>Decide</h2>
-                <p>Flexible Decision Maker App</p>
-                <div class="buttons">
-                    <button class="learn_more" data-modal-click="learn_more_decide" data-modal-icon="images/decide_logo.png" data-modal-title="Decide">Learn More</button>
-                </div>
-                <div data-modal-content="learn_more_decide">
-                    <h2>Overview:</h2>
-                    <p><b>Built</b> with React and originally launched in the Android app store usiong Cordova</p>
-                </div>
-            </div>
-            <div class="more_description">
-                <p>When you are having trouble making a decision, save a list of options and have it select one for you. If you don't like it, run it back.</p>
-            </div>
-            <div class="image-left">
-                <img src="images/decide.jpg" alt="Image Description"> 
-            </div>
-        </div>
-        <!-- <div class="container">
-            <div class="description">
-                <h2>GroceryListr</h2>
-                <p>This is a brief description of the product.</p>
-                <p>More detailed information about the product can be added here.</p>
-                <div class="buttons">
-                    <button class="learn_more" data-modal-click="learn_more_gl" data-modal-title="GrcoeryListr">Learn More</button>
-                </div>
-                <div data-modal-content="learn_more_gl">
-                    <p>e</p>
-                </div>
-            </div>
-            <div class="image-left">
-                <img src="images/monkeychicken.jpg" alt="Image Description">
-            </div>
-        </div> -->
-
-
-
-
-
-
-
-
 
 
     </section>
