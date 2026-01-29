@@ -1,0 +1,153 @@
+:root {
+    --bg-color: #1a1a2e;
+    --panel-bg: #16213e;
+    --accent: #4ecca3;
+    --tile-empty: #0f3460;
+    --tile-filled: #4ecca3;
+    --tile-wrong: #e94560;
+    --text-main: #e2e2e2;
+    --text-dim: #94a3b8;
+    --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    line-height: 1.6;
+}
+
+/* Layout Containers */
+[data-view] {
+    display: none;
+    max-width: 600px;
+    width: 100%;
+    background: var(--panel-bg);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+[data-view][data-selected="true"] {
+    display: block;
+}
+
+/* Typography & Buttons */
+h1 { font-weight: 300; letter-spacing: 2px; color: var(--accent); }
+label { display: block; margin-top: 15px; font-weight: bold; color: var(--text-dim); text-transform: uppercase; font-size: 0.8em; }
+
+button {
+    background: var(--accent);
+    color: var(--bg-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s, opacity 0.2s;
+    margin: 10px 0;
+}
+
+button:hover { opacity: 0.9; transform: translateY(-1px); }
+button:active { transform: translateY(0); }
+
+/* Selection UI (Settings/Hiscores) */
+[data-select] {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+[data-option] {
+    background: rgba(255,255,255,0.05);
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: 0.3s;
+    font-size: 0.9em;
+}
+
+[data-option][data-selected="true"] {
+    border-color: var(--accent);
+    background: rgba(78, 204, 163, 0.1);
+    color: var(--accent);
+}
+
+/* The Game Board */
+#board {
+    display: grid;
+    margin: 20px auto;
+    background: rgba(0,0,0,0.2);
+    padding: 5px;
+    border-radius: 4px;
+    gap: 2px;
+}
+
+.tile {
+    width: 30px;
+    height: 30px;
+    background-color: var(--tile-empty);
+    cursor: pointer;
+    transition: background 0.2s;
+    border-radius: 2px;
+}
+
+.tile:hover { background-color: #1b4b80; }
+
+/* Visual Markers for 5x5 Grid chunks */
+.tile[data-x="4"], .tile[data-x="9"] { border-right: 2px solid rgba(255,255,255,0.2); }
+.tile[data-y="4"], .tile[data-y="9"] { border-bottom: 2px solid rgba(255,255,255,0.2); }
+
+/* Tile States */
+.tile[data-answered][data-answer="1"] { background-color: var(--tile-filled); }
+.tile[data-answered][data-answer="0"] { 
+    background-color: var(--tile-wrong);
+    position: relative;
+}
+.tile[data-answered][data-answer="0"]::after {
+    content: "×"; color: white; line-height: 30px; font-weight: bold;
+}
+
+/* Hints */
+.hints_x { display: flex; justify-content: center; margin-left: 40px; }
+.hints_y { display: flex; flex-direction: column; position: absolute; left: -45px; }
+
+.hints {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-size: 11px;
+    color: var(--text-dim);
+}
+
+/* Action Toggles (Select vs Prevent) */
+.select_action {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+[data-type] {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+}
+
+[data-type="select"] { background-color: var(--tile-filled); }
+[data-type="prevent"] { background-color: var(--tile-wrong); }
+[data-type][data-selected="true"] { border-color: white; box-shadow: 0 0 15px var(--accent); }
+
+/* Timer & HUD */
+.timer { font-family: monospace; color: var(--accent); margin: 10px 0; }
+.messUps { font-size: 0.9em; color: var(--text-dim); }
